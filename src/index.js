@@ -5,29 +5,33 @@ const flownodes = sdk.init(module);
 
 // The unique name of your flow-node.  You can define multiple flow-nodes in this
 // file, but one is typical.
-flownodes.add('gm-random', {
-	name: 'Gm-random',
+flownodes.add('random', {
+	name: 'random',
 	// file support for: svg, png, gif, bmp, jpg, and tiff
 	icon: 'icon.svg',
-	description: 'TODO'
+	description: 'Return a random value'
 })
 	// Add a method to your flow-node.
-	.method('todo', {
-		name: 'TODO',
-		description: 'TODO'
+	.method('randInt', {
+		name: 'Random Integer
+		description: 'Return a random integer.'
 	})
 	// Add parameter(s) to your method.
-	.parameter('todo', {
-		description: 'TODO',
-		type: 'string'
+	.parameter('min', {
+		description: 'The minimum. Default 0',
+		type: 'integer'
+	})
+	.parameter('max', {
+		description: 'The maximum. Default 100',
+		type: 'integer'
 	})
 	// Once all parameters for the method are defined, add output(s) to your method.
 	.output('next', {
 		name: 'Next',
-		description: 'TODO',
-		context: '$.todo',
+		description: 'Continue',
+		context: '$.value',
 		schema: {
-			type: 'string'
+			type: 'integer'
 		}
 	})
 	// Provide the actual javascript implementation.  ES6 supported through babel.
