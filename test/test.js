@@ -16,20 +16,24 @@ describe('nodehandler-gm-random', () => {
 		it('[TEST-2] should fail to with invalid argument', () => {
 			// invoke gm-random#todo and check that the default callback is
 			// called: cb('invalid argument')
-			return mocknode(specs).node('gm-random').invoke('todo', { todo: undefined })
-				.then((data) => {
-					expect(data).to.deep.equal(['invalid argument']);
+			return mocknode(specs).node('gm-random').invoke('randInt', { min: 5, max: 4 })
+			.then((data) => {
+				expect(data).to.deep.equal({
+					error: [null, 'Min must be less than max.']
 				});
+			});
 		});
 
 		it('[TEST-3] should succeed', () => {
 			// invoke gm-random#todo and check that the 'next' output callback is
 			// called: cb.next(null, 'todo')
-			return mocknode(specs).node('gm-random').invoke('todo', { todo: 'stuff' })
+			return mocknode(specs).node('gm-random').invoke('randInt', { min: 4, max: 9 })
 				.then((data) => {
-					expect(data).to.deep.equal({
-						next: [null, 'todo']
-					});
+					expect(data).to.have.property('next');
+					expect(data.next).to.have.length(2);
+					expect(data.next[0]).to.be.null;
+					expect(data.next[1]).to.be.at.least(4);
+					expect(data.next[1]).to.be.at.most(9);
 				});
 		});
 	});

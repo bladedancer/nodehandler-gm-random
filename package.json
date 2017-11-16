@@ -1,7 +1,7 @@
 {
   "name": "nodehandler-gm-random",
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "Simple random generator node. NOT PRODUCTION CODE",
   "main": "dist/index.js",
   "author": "",
   "license": "ISC",

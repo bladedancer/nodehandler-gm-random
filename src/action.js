@@ -1,9 +1,8 @@
 exports = module.exports = function (req, cb) {
 	const min = req.params.min || 0;
-	const max = req.params.min || 100;
-	if (!min > max) {
-		// invoking the callback with an error will terminate the flow.
-		return cb('Min must be less than max.');
+	const max = req.params.max || 100;
+	if (min > max) {
+		return cb.error(null, 'Min must be less than max.');
 	}
-	cb.next(null, min + (Math.random() * (max-min)));
+	cb.next(null, min + Math.floor((Math.random() * (max + 1 - min))));
 };
